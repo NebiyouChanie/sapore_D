@@ -1,5 +1,5 @@
 import { db } from "@/lib/db/db";
- 
+  
 const validItemTypes = ['starter', 'maindish', 'dessert'] as const;
 type ValidItemType = typeof validItemTypes[number];
 
@@ -12,31 +12,24 @@ function toValidItemType(type: string): ValidItemType {
 
 export async function getMenuItems(isAdmin: boolean = false) {
   try {
-    // Fetch menu settings (assume only one row exists)
     const [menuSettings] = await db.query.menuSettings.findMany({
       limit: 1,
     });
 
-    // Instead of using complex joins that generate LATERAL JOIN syntax
-    // Fetch menu items and categories separately
-    const menuItems = await db.query.menuItem.findMany();
-    const categories = await db.query.category.findMany();
-    
-    // Join them manually in JavaScript
-    const menuItemsWithCategories = menuItems.map(item => {
-      const category = categories.find(cat => cat.id === item.categoryId) || null;
-      return {
-        ...item,
-        category,
-        itemType: toValidItemType(item.itemType)
-      };
+    const menuItems = await db.query.menuItem.findMany({
+      with: {
+        category: true,
+      },
     });
 
-    if (isAdmin) return menuItemsWithCategories;
-
-    // Modify for frontend based on settings
-    return menuItemsWithCategories.map((item) => ({
+    if (isAdmin) return menuItems.map(item => ({
       ...item,
+      itemType: toValidItemType(item.itemType),
+    }));
+
+    return menuItems.map((item) => ({
+      ...item,
+      itemType: toValidItemType(item.itemType),
       price: menuSettings?.showPrice ? item.price : null,
       description: menuSettings?.showDescription ? item.description : null,
     }));
