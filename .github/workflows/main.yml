@@ -33,10 +33,7 @@ jobs:
       - name: 🔨 Install dependencies
         run: npm install --legacy-peer-deps
 
-      - name: 🗄️ Run Drizzle migrations
-        run: npx drizzle-kit migrate
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      # Migration step removed here
 
       - name: 🔨 Build Project
         run: npm run build
