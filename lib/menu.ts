@@ -1,5 +1,4 @@
 import { db } from "@/lib/db/db";
-import type { MenuItem } from "@/types";
 
 const validItemTypes = ['starter', 'maindish', 'dessert'] as const;
 type ValidItemType = typeof validItemTypes[number];
