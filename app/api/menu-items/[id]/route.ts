@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db/db";
-import { menuItem } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
+import { menuItem, category } from "@/lib/db/schema";
+import { eq, inArray } from "drizzle-orm";
 import { z } from "zod";
 
 const menuItemSchema = z.object({
@@ -15,6 +15,12 @@ const menuItemSchema = z.object({
   itemType: z.enum(["starter", "maindish", "dessert"]),
 });
 
+// Helper function to fetch category by id
+async function getCategoryById(categoryId: string) {
+  const [cat] = await db.select().from(category).where(eq(category.id, categoryId)).limit(1);
+  return cat || null;
+}
+
 export const GET = async (
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -22,19 +28,21 @@ export const GET = async (
   try {
     const { id } = await params;
 
-    const item = await db.query.menuItem.findFirst({
-      where: eq(menuItem.id, id),
-      with: { category: true },
-    });
+    // Fetch menu item by id
+    const [item] = await db.select().from(menuItem).where(eq(menuItem.id, id)).limit(1);
 
     if (!item) {
       return NextResponse.json({ error: "Menu item not found" }, { status: 404 });
     }
 
+    // Fetch related category separately to avoid lateral join issues
+    const categoryData = item.categoryId ? await getCategoryById(item.categoryId) : null;
+
+    // Return combined data
     return NextResponse.json(
       {
         ...item,
-        categoryId: item.category.id,
+        category: categoryData,
       },
       { status: 200 }
     );
@@ -51,8 +59,11 @@ export const PUT = async (
   try {
     const { id } = await params;
     const body = await request.json();
+
+    // Validate input
     const validatedData = menuItemSchema.parse(body);
 
+    // Update menu item
     await db
       .update(menuItem)
       .set({
@@ -67,13 +78,24 @@ export const PUT = async (
       })
       .where(eq(menuItem.id, id));
 
-    const [updatedItem] = await db
-      .select()
-      .from(menuItem)
-      .where(eq(menuItem.id, id))
-      .limit(1);
+    // Fetch updated item
+    const [updatedItem] = await db.select().from(menuItem).where(eq(menuItem.id, id)).limit(1);
 
-    return NextResponse.json(updatedItem, { status: 200 });
+    if (!updatedItem) {
+      return NextResponse.json({ error: "Menu item not found after update" }, { status: 404 });
+    }
+
+    // Fetch related category
+    const categoryData = updatedItem.categoryId ? await getCategoryById(updatedItem.categoryId) : null;
+
+    // Return updated item with category
+    return NextResponse.json(
+      {
+        ...updatedItem,
+        category: categoryData,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Error updating menu item:", error);
 
@@ -101,6 +123,7 @@ export const DELETE = async (
   try {
     const { id } = await params;
 
+    // Delete menu item by id
     await db.delete(menuItem).where(eq(menuItem.id, id));
 
     return NextResponse.json({ message: "Menu item deleted successfully" }, { status: 200 });

@@ -7,6 +7,7 @@ import { eq } from 'drizzle-orm';
 async function GETHandler() {
   try {
     const [settings] = await db.select().from(menuSettings).limit(1);
+    console.log("🚀 ~ GETHandler ~ settings:", settings)
     return NextResponse.json(settings, { status: 200 })
   } catch (error) {
     console.error("Error fetching menu settings:", error)
