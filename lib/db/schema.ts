@@ -46,12 +46,12 @@ export const reservation = mysqlTable('reservation', {
   email: varchar('email', { length: 255 }).notNull(),
   phoneNumber: varchar('phone_number', { length: 255 }).notNull(),
   numberOfGuests: int('number_of_guests').notNull(),
-  date: datetime('date').notNull(),
+  date: datetime('date', { mode: 'string' }).notNull(),
   time: varchar('time', { length: 50 }).notNull(),
   message: text('message').notNull(),
-  status: varchar('status', { length: 50 }).notNull().default('Pending'), // enum values: 'Pending', 'Confirmed', 'Cancelled'
-  createdAt: datetime('created_at').notNull().default(sql`CURRENT_TIMESTAMP`),
-  updatedAt: datetime('updated_at').notNull().default(sql`CURRENT_TIMESTAMP`).$onUpdateFn(() => sql`CURRENT_TIMESTAMP`),
+  status: varchar('status', { length: 50 }).notNull().default('Pending'),
+  createdAt: datetime('created_at', { mode: 'string' }).notNull().default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: datetime('updated_at', { mode: 'string' }).notNull().default(sql`CURRENT_TIMESTAMP`).$onUpdateFn(() => sql`CURRENT_TIMESTAMP`),
 });
 
 // Relations
