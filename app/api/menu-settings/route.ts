@@ -1,31 +1,39 @@
 import { db } from "@/lib/db/db";
-import { NextResponse, NextRequest } from "next/server"
-import { protectApiRoute } from "@/lib/api-auth"
+import { NextResponse, NextRequest } from "next/server";
+import { protectApiRoute } from "@/lib/api-auth";
 import { menuSettings } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
 
 async function GETHandler() {
   try {
     const [settings] = await db.select().from(menuSettings).limit(1);
-    console.log("🚀 ~ GETHandler ~ settings:", settings)
-    return NextResponse.json(settings, { status: 200 })
+
+    if (!settings) {
+      return NextResponse.json({ error: "Menu settings not found" }, { status: 404 });
+    }
+
+    console.log("🚀 ~ GETHandler ~ settings:", settings);
+    return NextResponse.json(settings, { status: 200 });
   } catch (error) {
-    console.error("Error fetching menu settings:", error)
-    return NextResponse.json({ error: "Failed to fetch settings" }, { status: 500 })
+    console.error("Error fetching menu settings:", error);
+    return NextResponse.json({ error: "Failed to fetch settings" }, { status: 500 });
   }
 }
 
-
 async function POSTHandler(req: NextRequest) {
   try {
-    const { showPrice, showDescription } = await req.json()
+    const { showPrice, showDescription } = await req.json();
 
     const [currentSettings] = await db.select().from(menuSettings).limit(1);
-    
+
+    if (!currentSettings) {
+      return NextResponse.json({ error: "Menu settings not found" }, { status: 404 });
+    }
+
     await db.update(menuSettings)
-      .set({ 
-        showPrice, 
-        showDescription 
+      .set({
+        showPrice,
+        showDescription,
       })
       .where(eq(menuSettings.id, currentSettings.id));
 
@@ -35,13 +43,12 @@ async function POSTHandler(req: NextRequest) {
       .where(eq(menuSettings.id, currentSettings.id))
       .limit(1);
 
-    return NextResponse.json(updatedSettings, { status: 200 })
+    return NextResponse.json(updatedSettings, { status: 200 });
   } catch (error) {
-    console.error("Error updating settings:", error)
-    return NextResponse.json({ error: "Failed to update settings" }, { status: 500 })
+    console.error("Error updating settings:", error);
+    return NextResponse.json({ error: "Failed to update settings" }, { status: 500 });
   }
 }
 
- 
-export const GET = protectApiRoute(GETHandler)
-export const POST = protectApiRoute(POSTHandler)
+export const GET = protectApiRoute(GETHandler);
+export const POST = protectApiRoute(POSTHandler);

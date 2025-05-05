@@ -35,8 +35,8 @@ export const menuSettings = mysqlTable('menu_settings', {
   id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
   showPrice: boolean('show_price').notNull().default(true),
   showDescription: boolean('show_description').notNull().default(true),
-  createdAt: datetime('created_at').notNull().default(sql`CURRENT_TIMESTAMP`),
-  updatedAt: datetime('updated_at').notNull().default(sql`CURRENT_TIMESTAMP`).$onUpdateFn(() => sql`CURRENT_TIMESTAMP`),
+  createdAt: datetime('created_at', { mode: 'string' }).notNull().default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: datetime('updated_at', { mode: 'string' }).notNull().default(sql`CURRENT_TIMESTAMP`).$onUpdateFn(() => sql`CURRENT_TIMESTAMP`),
 });
 
 // Reservation table
