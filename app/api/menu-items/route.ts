@@ -1,8 +1,8 @@
 import { db } from "@/lib/db/db";
 import { NextResponse, NextRequest } from "next/server";
 import { protectApiRoute } from "@/lib/api-auth";
-import { eq } from 'drizzle-orm';
-import { menuItem, menuSettings } from '@/lib/db/schema';
+import { eq, inArray } from 'drizzle-orm';
+import { menuItem, menuSettings,category } from '@/lib/db/schema';
 import { z } from "zod";
 
 const menuItemSchema = z.object({
@@ -71,24 +71,42 @@ async function POSTHandler(req: NextRequest) {
 
 
 
+
 async function GETHandler(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const isAdmin = searchParams.get("admin") === "true";
 
+    // Fetch menu settings (assume only one row)
     const [settings] = await db.select().from(menuSettings).limit(1);
 
-    const items = await db.query.menuItem.findMany({
-      with: {
-        category: true,
-      },
-    });
+    // Fetch all menu items
+    const items = await db.select().from(menuItem);
 
+    // Extract category IDs from menu items
+    const categoryIds = [...new Set(items.map(item => item.categoryId).filter(Boolean))];
+
+    // Fetch categories for those IDs
+    const categories = categoryIds.length > 0
+      ? await db.select().from(category).where(inArray(category.id, categoryIds))
+      : [];
+
+    // Map categories by id for quick lookup
+    const categoryMap = new Map(categories.map(cat => [cat.id, cat]));
+
+    // Attach category data manually to each menu item
+    const itemsWithCategory = items.map(item => ({
+      ...item,
+      category: categoryMap.get(item.categoryId) || null,
+    }));
+
+    // If admin, return full data
     if (isAdmin) {
-      return NextResponse.json(items, { status: 200 });
+      return NextResponse.json(itemsWithCategory, { status: 200 });
     }
 
-    const filteredItems = items.map((item) => ({
+    // Otherwise, filter price and description based on settings
+    const filteredItems = itemsWithCategory.map(item => ({
       ...item,
       price: settings?.showPrice ? item.price : null,
       description: settings?.showDescription ? item.description : null,
@@ -103,6 +121,9 @@ async function GETHandler(req: NextRequest) {
     );
   }
 }
+
+ 
+
 
 const protectedPOST = protectApiRoute(POSTHandler);
 
