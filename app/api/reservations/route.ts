@@ -11,7 +11,9 @@ const reservationSchema = z.object({
   email: z.string().trim().email('Email is required'),
   phoneNumber: z.string().min(10, 'Phone Number is required'),
   numberOfGuests: z.number().min(1, 'At least 1 guest is required'),
-  date: z.string().min(1, 'Date is required'),
+  date: z.string()
+    .min(1, 'Date is required')
+    .refine(val => !isNaN(Date.parse(val)), { message: 'Invalid date format' }),
   time: z.string().min(1, 'Time is required'),
   message: z.string().optional(),
 });
@@ -24,20 +26,18 @@ async function POSTHandler(req: NextRequest) {
     // Generate ID upfront since we're using UUID
     const newReservationId = crypto.randomUUID();
 
-    // Insert with explicit ID
+    // Insert with explicit ID and date as string (ISO format)
     await db.insert(reservation).values({
       id: newReservationId,
       name: validatedData.name,
       email: validatedData.email,
       phoneNumber: validatedData.phoneNumber,
       numberOfGuests: validatedData.numberOfGuests,
-      date: new Date(validatedData.date),
+      date: validatedData.date, // <-- string, not Date object
       time: validatedData.time,
       message: validatedData.message || '',
-      status: 'Pending' as const,  
+      status: 'Pending' as const,
     });
-    
-    
 
     // Fetch the complete record we just inserted
     const [newReservation] = await db.select()
@@ -67,21 +67,21 @@ async function POSTHandler(req: NextRequest) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { 
-          error: 'Validation failed', 
+        {
+          error: 'Validation failed',
           details: error.errors.map(e => ({
             field: e.path.join('.'),
-            message: e.message
-          }))
+            message: e.message,
+          })),
         },
         { status: 400 }
       );
     }
 
     return NextResponse.json(
-      { 
+      {
         error: 'Failed to create reservation',
-        message: error instanceof Error ? error.message : 'Unknown error'
+        message: error instanceof Error ? error.message : 'Unknown error',
       },
       { status: 500 }
     );
@@ -96,12 +96,12 @@ async function GETHandler(req: NextRequest) {
     const startDate = searchParams.get('startDate');
     const endDate = searchParams.get('endDate');
 
-    // Build where conditions
+    // Build where conditions using strings for dates
     const whereConditions = [];
-    if (startDate) whereConditions.push(gte(reservation.date, new Date(startDate)));
-    if (endDate) whereConditions.push(lte(reservation.date, new Date(endDate)));
+    if (startDate) whereConditions.push(gte(reservation.date, startDate));
+    if (endDate) whereConditions.push(lte(reservation.date, endDate));
 
-    // Get reservations
+    // Get reservations with pagination and filtering
     const reservations = await db.query.reservation.findMany({
       where: whereConditions.length > 0 ? and(...whereConditions) : undefined,
       offset: (page - 1) * pageSize,
@@ -109,11 +109,11 @@ async function GETHandler(req: NextRequest) {
       orderBy: [desc(reservation.createdAt)],
     });
 
-    // Get total count
+    // Get total count for pagination
     const totalResult = await db.select({ count: count() })
       .from(reservation)
       .where(whereConditions.length > 0 ? and(...whereConditions) : undefined);
-    const totalReservations = totalResult[0].count;
+    const totalReservations = totalResult[0]?.count ?? 0;
 
     if (reservations.length === 0) {
       return new NextResponse('No Reservation Found', { status: 404 });
