@@ -1,9 +1,16 @@
 import { db } from "@/lib/db/db";
-import type { MenuItem } from "@/types";
-import { unstable_cache } from 'next/cache';
+  
+const validItemTypes = ['starter', 'maindish', 'dessert'] as const;
+type ValidItemType = typeof validItemTypes[number];
 
-// First define the uncached version
-async function getMenuItemsUncached(isAdmin: boolean = false) {
+function toValidItemType(type: string): ValidItemType {
+  if (validItemTypes.includes(type as ValidItemType)) {
+    return type as ValidItemType;
+  }
+  return 'starter'; // fallback
+}
+
+export async function getMenuItems(isAdmin: boolean = false) {
   try {
     const [menuSettings] = await db.query.menuSettings.findMany({
       limit: 1,
@@ -15,28 +22,19 @@ async function getMenuItemsUncached(isAdmin: boolean = false) {
       },
     });
 
-    // Handle the itemType type safety
-    const typedMenuItems = menuItems.map(item => ({
+    if (isAdmin) return menuItems.map(item => ({
       ...item,
-      itemType: item.itemType as 'starter' | 'maindish' | 'dessert'
+      itemType: toValidItemType(item.itemType),
     }));
 
-    if (isAdmin) return typedMenuItems;
-
-    return typedMenuItems.map((item: MenuItem) => ({
+    return menuItems.map((item) => ({
       ...item,
+      itemType: toValidItemType(item.itemType),
       price: menuSettings?.showPrice ? item.price : null,
       description: menuSettings?.showDescription ? item.description : null,
     }));
   } catch (error) {
     console.error("Failed to fetch menu items:", error);
-    throw new Error("Failed to load menu data");
+    return [];
   }
 }
-
-// Then wrap it with unstable_cache
-export const getMenuItems = unstable_cache(
-  getMenuItemsUncached,
-  ['menu-items'],
-  { revalidate: 3600 } // 1 hour cache
-);
