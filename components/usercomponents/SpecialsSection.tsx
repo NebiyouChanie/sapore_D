@@ -32,6 +32,7 @@ async function getSpecialItems(): Promise<MenuItem[]> {
 export const dynamic = 'force-dynamic'; 
 export default async function SpecialsSection() {
   const specialItems = await getSpecialItems();
+  console.log("🚀 ~ SpecialsSection ~ specialItems:", specialItems)
 
   return (
     <section className="py-16 md:py-24">
