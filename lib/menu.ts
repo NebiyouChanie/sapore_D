@@ -3,12 +3,6 @@ import { db } from "@/lib/db/db";
 const validItemTypes = ['starter', 'maindish', 'dessert'] as const;
 type ValidItemType = typeof validItemTypes[number];
 
-function toValidItemType(type: string): ValidItemType {
-  if (validItemTypes.includes(type as ValidItemType)) {
-    return type as ValidItemType;
-  }
-  return 'starter'; // fallback
-}
 
 export async function getMenuItems(isAdmin: boolean = false) {
   try {
