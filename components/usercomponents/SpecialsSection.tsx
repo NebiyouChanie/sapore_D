@@ -21,8 +21,11 @@ import { getMenuItems } from "@/lib/menu";
 
 async function getSpecialItems(): Promise<MenuItem[]> {
   try {
-    const allItems = await getMenuItems(); 
-    return allItems.filter((item: MenuItem) => item.isSpecial).slice(0, 4);
+    const allItems = await getMenuItems();
+    console.log('All items count:', allItems.length);
+    const specials = allItems.filter(item => item.isSpecial);
+    console.log('Special items count:', specials.length);
+    return specials.slice(0, 4);
   } catch (error) {
     console.error('Error fetching special items:', error);
     return [];
