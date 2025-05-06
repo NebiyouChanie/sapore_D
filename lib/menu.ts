@@ -19,8 +19,7 @@ export async function getMenuItems(isAdmin: boolean = false) {
 
     // Fetch all menu items
     const menuItems = await db.query.menuItem.findMany();
-    console.log("🚀 ~ getMenuItems ~ menuItems:", menuItems)
-
+ 
     // Fetch all categories
     const categories = await db.query.category.findMany();
 
