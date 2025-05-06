@@ -1,4 +1,3 @@
-'use client'
 import * as motion from "motion/react-client";
 import Image from "next/image";
 
@@ -33,7 +32,7 @@ async function getSpecialItems(): Promise<MenuItem[]> {
   }
 }
 
-// export const dynamic = 'force-dynamic'; 
+export const dynamic = 'force-dynamic'; 
 export default async function SpecialsSection() {
   const specialItems = await getSpecialItems();
   console.log("🚀 ~ SpecialsSection ~ specialItems:", specialItems)
