@@ -1,3 +1,4 @@
+import logger from '@/lib/logger';
 import * as motion from "motion/react-client";
 import Image from "next/image";
 
@@ -25,8 +26,10 @@ async function getSpecialItems(): Promise<MenuItem[]> {
     console.log('All items count:', allItems.length);
     const specials = allItems.filter(item => item.isSpecial);
     console.log('Special items count:', specials.length);
+    logger.info(`Special items count: ${specials.length}`);
     return specials.slice(0, 4);
   } catch (error) {
+    logger.error('Error fetching items:', error);
     console.error('Error fetching special items:', error);
     return [];
   }
@@ -35,7 +38,8 @@ async function getSpecialItems(): Promise<MenuItem[]> {
 export const dynamic = 'force-dynamic'; 
 export default async function SpecialsSection() {
   const specialItems = await getSpecialItems();
-  console.log("🚀 ~ SpecialsSection ~ specialItems:", specialItems)
+
+
 
   return (
     <section className="py-16 md:py-24">
