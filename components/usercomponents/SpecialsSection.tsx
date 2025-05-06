@@ -1,6 +1,9 @@
-import logger from '@/lib/logger';
+"use client";
+
 import * as motion from "motion/react-client";
 import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import { getMenuItems } from "@/lib/menu";
 
 interface MenuItem {
   id: string;
@@ -10,36 +13,35 @@ interface MenuItem {
   isMainMenu: boolean;
   imageUrl: string;
   isSpecial: boolean;
-  itemType: 'starter' | 'maindish' | 'dessert';
+  itemType: "starter" | "maindish" | "dessert";
   categoryId: string;
   category: {
     id: string;
     name: string;
-  } | null;  
+  } | null;
 }
 
-import { getMenuItems } from "@/lib/menu";
-
-async function getSpecialItems(): Promise<MenuItem[]> {
+async function fetchSpecialItems(): Promise<MenuItem[]> {
   try {
     const allItems = await getMenuItems();
-    // const specials = allItems.filter(item => item.isSpecial);
-    // logger.info(`Special items count: ${allItems}`);
-    // logger.info(`Special items count: ${specials}`);
-    // return specials.slice(0, 4);
-    return allItems
+    const specials = allItems.filter((item) => item.isSpecial);
+    return specials.slice(0, 4);
   } catch (error) {
-    logger.error('Error fetching items:', error);
-    console.error('Error fetching special items:', error);
+    console.error("Error fetching special items:", error);
     return [];
   }
 }
 
-export const dynamic = 'force-dynamic'; 
-export default async function SpecialsSection() {
-  const specialItems = await getSpecialItems();
+export default function SpecialsSection() {
+  const [specialItems, setSpecialItems] = useState<MenuItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
-
+  useEffect(() => {
+    fetchSpecialItems().then((items) => {
+      setSpecialItems(items);
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <section className="py-16 md:py-24">
@@ -49,24 +51,18 @@ export default async function SpecialsSection() {
           Four of our 10 signature lasagnas, each representing the diverse culinary traditions of Italy.
         </p>
 
-        {specialItems.length > 0 ? (
+        {loading ? (
+          <p className="text-gray-500">Loading specials...</p>
+        ) : specialItems.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {specialItems.map((item, index) => (
               <motion.div
                 key={item.id}
                 className="flex flex-col items-center"
-                initial={{ opacity: 0, x: -50, rotate: -20 }} 
-                whileInView={{
-                  opacity: 1,
-                  x: 0,
-                  rotate: 0,  
-                }}
-                viewport={{ once: true, amount: 0.5 }} 
-                transition={{
-                  duration: 0.7,
-                  delay: index * 0.2, 
-                  ease: "easeInOut",
-                }}
+                initial={{ opacity: 0, x: -50, rotate: -20 }}
+                whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.7, delay: index * 0.2, ease: "easeInOut" }}
               >
                 <div className="relative w-[280px] h-[280px] rounded-full overflow-hidden mb-2">
                   <Image
