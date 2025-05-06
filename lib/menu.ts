@@ -1,8 +1,5 @@
 import { db } from "@/lib/db/db";
   
-const validItemTypes = ['starter', 'maindish', 'dessert'] as const;
-type ValidItemType = typeof validItemTypes[number];
-
 
 export async function getMenuItems(isAdmin: boolean = false) {
   try {
