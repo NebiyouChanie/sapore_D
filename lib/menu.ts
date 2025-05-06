@@ -1,5 +1,14 @@
 import { db } from "@/lib/db/db";
   
+const validItemTypes = ['starter', 'maindish', 'dessert'] as const;
+type ValidItemType = typeof validItemTypes[number];
+
+function toValidItemType(type: string): ValidItemType {
+  if (validItemTypes.includes(type as ValidItemType)) {
+    return type as ValidItemType;
+  }
+  return 'starter'; // fallback
+}
 
 export async function getMenuItems(isAdmin: boolean = false) {
   try {
@@ -19,16 +28,6 @@ export async function getMenuItems(isAdmin: boolean = false) {
       ...item,
       category: categories.find(cat => cat.id === item.categoryId) || null,
     }));
-
-    const validItemTypes = ['starter', 'maindish', 'dessert'] as const;
-    type ValidItemType = typeof validItemTypes[number];
-
-    function toValidItemType(type: string): ValidItemType {
-      if (validItemTypes.includes(type as ValidItemType)) {
-        return type as ValidItemType;
-      }
-      return 'starter';
-    }
 
     if (isAdmin) return itemsWithCategory.map(item => ({
       ...item,

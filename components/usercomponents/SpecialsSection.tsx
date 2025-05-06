@@ -4,8 +4,8 @@ import Image from "next/image";
 interface MenuItem {
   id: string;
   name: string;
-  description: string | null; 
-  price: number | null; 
+  description: string | null;
+  price: number | null;
   isMainMenu: boolean;
   imageUrl: string;
   isSpecial: boolean;
@@ -14,7 +14,7 @@ interface MenuItem {
   category: {
     id: string;
     name: string;
-  };
+  } | null;  
 }
 
 import { getMenuItems } from "@/lib/menu";
