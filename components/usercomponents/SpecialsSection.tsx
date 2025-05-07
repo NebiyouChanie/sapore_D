@@ -1,58 +1,24 @@
 import * as motion from "motion/react-client";
 import Image from "next/image";
-import { getMenuItems } from "@/lib/menu";
+import { getSpecialItems } from "@/lib/menu"; // Import the getSpecialItems function
 import logger from '@/lib/logger';
 
-interface MenuItem {
-  id: string;
-  name: string;
-  description: string | null;
-  price: number | null;
-  isMainMenu: boolean;
-  imageUrl: string;
-  isSpecial: boolean;
-  itemType: 'starter' | 'maindish' | 'dessert';
-  categoryId: string;
-  category: {
-    id: string;
-    name: string;
-  } | null;  
-}
+export const dynamic = 'force-dynamic';
 
-async function getSpecialItems(): Promise<MenuItem[]> {
+// Fetch special items function
+async function fetchSpecialItems() {
   try {
-    const allItems = await getMenuItems();
-    console.log('🔍 Total menu items fetched:', allItems.length);
-
-    allItems.forEach((item, i) => {
-      console.log(`Item ${i + 1}:`, {
-        id: item.id,
-        name: item.name,
-        isSpecial: item.isSpecial,
-        imageUrl: item.imageUrl,
-      });
-    });
-
-    const specials = allItems.filter(item => item.isSpecial === true);
-    console.log('🎯 Filtered special items count:', specials.length);
-
-    const selected = specials.slice(0, 4);
-    console.log('✅ Specials selected for UI:', selected.map(i => i.name));
-
-    return selected;
+    const specialItems = await getSpecialItems(); // Get special items from the function
+    logger.info(`Special items fetched: ${specialItems.length}`);
+    return specialItems;
   } catch (error) {
     console.error('🚨 Error fetching special items:', error);
     return [];
   }
 }
 
-export const dynamic = 'force-dynamic';
-
 export default async function SpecialsSection() {
-  const specialItems = await getSpecialItems();
-  logger.info(`Special items sssssssssssss: ${specialItems}`);
-
-  console.log("🚀 ~ SpecialsSection ~ specialItems:ssssssssssss", specialItems)
+  const specialItems = await fetchSpecialItems(); // Fetch special items
 
   return (
     <section className="py-16 md:py-24">

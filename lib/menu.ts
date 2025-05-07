@@ -1,5 +1,5 @@
 import { db } from "@/lib/db/db";
-  
+
 const validItemTypes = ['starter', 'maindish', 'dessert'] as const;
 type ValidItemType = typeof validItemTypes[number];
 
@@ -10,6 +10,7 @@ function toValidItemType(type: string): ValidItemType {
   return 'starter'; // fallback
 }
 
+// Your existing getMenuItems function, unchanged
 export async function getMenuItems(isAdmin: boolean = false) {
   try {
     // Fetch menu settings
@@ -19,7 +20,7 @@ export async function getMenuItems(isAdmin: boolean = false) {
 
     // Fetch all menu items
     const menuItems = await db.query.menuItem.findMany();
- 
+
     // Fetch all categories
     const categories = await db.query.category.findMany();
 
@@ -42,6 +43,18 @@ export async function getMenuItems(isAdmin: boolean = false) {
     }));
   } catch (error) {
     console.error("Failed to fetch menu items:", error);
+    return [];
+  }
+}
+
+// New function to get special items
+export async function getSpecialItems() {
+  try {
+    const allItems = await getMenuItems(); // Fetch all items
+    const specialItems = allItems.filter(item => item.isSpecial === true); // Filter for special items
+    return specialItems.slice(0, 4); // Return first 4 special items (or adjust as needed)
+  } catch (error) {
+    console.error("🚨 Error fetching special items:", error);
     return [];
   }
 }
