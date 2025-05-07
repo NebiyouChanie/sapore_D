@@ -34,6 +34,7 @@ async function fetchSpecialItems(): Promise<MenuItem[]> {
 
 export default function SpecialsSection() {
   const [specialItems, setSpecialItems] = useState<MenuItem[]>([]);
+  console.log("🚀 ~ SpecialsSection ~ specialItems:", specialItems)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
