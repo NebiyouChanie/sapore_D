@@ -2,7 +2,6 @@ import Header from "@/components/usercomponents/Header";
 import Image from "next/image";
 import * as motion from "motion/react-client";
 import QuickLinks from "@/components/QuickLinks";
-import logger from '@/lib/logger';
 
 interface Category {
   id: string;
@@ -39,7 +38,6 @@ export default async function MenuPage() {
     getCategories(),
     getMenuItems()
   ]);
-  logger.info(`Special items count: ${categories}`);
 
   // Group menu items by category - fixed typing issue
   const categoriesWithItems: CategoryWithItems[] = categories.map((category: Category) => {

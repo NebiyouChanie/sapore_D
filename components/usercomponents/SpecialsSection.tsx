@@ -1,6 +1,7 @@
 import * as motion from "motion/react-client";
 import Image from "next/image";
 import { getMenuItems } from "@/lib/menu";
+import logger from '@/lib/logger';
 
 interface MenuItem {
   id: string;
@@ -49,6 +50,9 @@ export const dynamic = 'force-dynamic';
 
 export default async function SpecialsSection() {
   const specialItems = await getSpecialItems();
+  logger.info(`Special items sssssssssssss: ${specialItems}`);
+
+  console.log("🚀 ~ SpecialsSection ~ specialItems:ssssssssssss", specialItems)
 
   return (
     <section className="py-16 md:py-24">
