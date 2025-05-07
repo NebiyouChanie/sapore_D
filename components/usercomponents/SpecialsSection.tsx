@@ -1,24 +1,32 @@
 import * as motion from "motion/react-client";
 import Image from "next/image";
-import { getSpecialItems } from "@/lib/menu"; // Import the getSpecialItems function
 import logger from '@/lib/logger';
+
+interface MenuItem {
+  id: string;
+  name: string;
+  description: string | null;
+  price: number | null;
+  isMainMenu: boolean;
+  imageUrl: string;
+  isSpecial: boolean;
+  itemType: 'starter' | 'maindish' | 'dessert';
+  categoryId: string;
+  category: {
+    id: string;
+    name: string;
+  } | null;  
+}
+
+import { getSpecialItems } from "@/lib/menu";
 
 export const dynamic = 'force-dynamic';
 
-// Fetch special items function
-async function fetchSpecialItems() {
-  try {
-    const specialItems = await getSpecialItems(); // Get special items from the function
-    logger.info(`Special items fetched: ${specialItems.length}`);
-    return specialItems;
-  } catch (error) {
-    console.error('🚨 Error fetching special items:', error);
-    return [];
-  }
-}
-
 export default async function SpecialsSection() {
-  const specialItems = await fetchSpecialItems(); // Fetch special items
+  const specialItems = await getSpecialItems();
+  logger.info(`Special items sssssssssssss: ${specialItems}`);
+
+  console.log("🚀 ~ SpecialsSection ~ specialItems:ssssssssssss", specialItems)
 
   return (
     <section className="py-16 md:py-24">
