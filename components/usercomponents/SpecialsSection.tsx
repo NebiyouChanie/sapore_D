@@ -53,7 +53,7 @@ export default async function SpecialsSection() {
   return (
     <section className="py-16 md:py-24">
       <div className="container px-4 md:px-10 xl:px-32 2xl:px-40 mx-auto text-center">
-        <h2 className="font-playfair text-4xl md:text-5xl font-medium mb-4">Our Specials</h2>
+        <h2 className="font-playfair text-4xl md:text-5xl font-medium mb-4">Our Specials Are good</h2>
         <p className="text-gray-500 font-light text-[18px] max-w-2xl mx-auto mb-12">
           Four of our 10 signature lasagnas, each representing the diverse culinary traditions of Italy.
         </p>
