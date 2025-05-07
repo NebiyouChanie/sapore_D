@@ -6,8 +6,7 @@ import logger from '@/lib/logger';
 
 import { getSpecialItems } from "@/lib/menu";
 
-export const dynamic = 'force-dynamic';
-
+ 
 export default async function SpecialsSection() {
   const specialItems = await getSpecialItems();
   logger.info(`Special items sssssssssssss: ${specialItems}`);
