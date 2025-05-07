@@ -1,3 +1,4 @@
+//lib/menu.ts
 import { db } from "@/lib/db/db";
 
 const validItemTypes = ['starter', 'maindish', 'dessert'] as const;

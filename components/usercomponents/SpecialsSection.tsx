@@ -1,18 +1,27 @@
 import * as motion from "motion/react-client";
 import Image from "next/image";
-import logger from '@/lib/logger';
 
- 
+interface MenuItem {
+  id: string;
+  name: string;
+  description: string | null;
+  price: number | null;
+  isMainMenu: boolean;
+  imageUrl: string;
+  isSpecial: boolean;
+  itemType: 'starter' | 'maindish' | 'dessert';
+  categoryId: string;
+  category: {
+    id: string;
+    name: string;
+  } | null;
+}
 
-import { getSpecialItems } from "@/lib/menu";
+interface SpecialsSectionProps {
+  specialItems: MenuItem[];
+}
 
- 
-export default async function SpecialsSection() {
-  const specialItems = await getSpecialItems();
-  logger.info(`Special items sssssssssssss: ${specialItems}`);
-
-  console.log("🚀 ~ SpecialsSection ~ specialItems:ssssssssssss", specialItems)
-
+export default function SpecialsSection({ specialItems }: SpecialsSectionProps) {
   return (
     <section className="py-16 md:py-24">
       <div className="container px-4 md:px-10 xl:px-32 2xl:px-40 mx-auto text-center">
