@@ -2,21 +2,7 @@ import * as motion from "motion/react-client";
 import Image from "next/image";
 import logger from '@/lib/logger';
 
-interface MenuItem {
-  id: string;
-  name: string;
-  description: string | null;
-  price: number | null;
-  isMainMenu: boolean;
-  imageUrl: string;
-  isSpecial: boolean;
-  itemType: 'starter' | 'maindish' | 'dessert';
-  categoryId: string;
-  category: {
-    id: string;
-    name: string;
-  } | null;  
-}
+ 
 
 import { getSpecialItems } from "@/lib/menu";
 
