@@ -34,8 +34,7 @@ interface CategoryWithItems extends Category {
   imageUrl: string;
 }
 
-// export const revalidate = 600; // Regenerate every 10 minutes
-export default async function MenuPage() {
+ export default async function MenuPage() {
   const [categories, menuItems] = await Promise.all([
     getCategories(),
     getMenuItems()

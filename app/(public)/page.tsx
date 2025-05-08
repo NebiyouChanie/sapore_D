@@ -11,8 +11,7 @@ import TestimonialSection from "@/components/usercomponents/TestimonialSection"
 import BookingSection from "@/components/usercomponents/BookingSection"
 
 import { getSpecialItems } from "@/lib/menu";
-// export const revalidate = 600; // Regenerate every 10 minutes
-export default async function Home() {
+ export default async function Home() {
   const specialItems = await getSpecialItems();
 
   return (
