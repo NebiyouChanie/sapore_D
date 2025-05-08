@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 export async function POST(req: NextRequest) {
   const secret = process.env.REVALIDATE_SECRET;
@@ -8,13 +9,15 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    // Revalidate home and menu pages
-    // @ts-expect-error: revalidate is available in Next.js API routes
-    await req.revalidate("/");
-    // @ts-expect-error: revalidate is available in Next.js API routes
-    await req.revalidate("/menu");
-    return NextResponse.json({ revalidated: true });
-  } catch {
-    return NextResponse.json({ message: "Error revalidating" }, { status: 500 });
+    const { paths } = await req.json();
+    if (!paths || !Array.isArray(paths)) {
+      return NextResponse.json({ message: "No paths provided" }, { status: 400 });
+    }
+    for (const path of paths) {
+      revalidatePath(path);
+    }
+    return NextResponse.json({ revalidated: true, paths });
+  } catch (err) {
+    return NextResponse.json({ message: "Error revalidating", error: err }, { status: 500 });
   }
 }

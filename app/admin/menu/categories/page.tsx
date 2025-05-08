@@ -85,9 +85,12 @@ export default function CategoryManagement() {
       await fetch("/api/revalidate", {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           "Authorization": `Bearer ${process.env.NEXT_PUBLIC_REVALIDATE_SECRET || "your-strong-secret"}`,
         },
+        body: JSON.stringify({ paths: ["/", "/menu"] }),
       });
+      
 
       const newCategory = await response.json()
       setCategories((prev) => [...prev, newCategory])

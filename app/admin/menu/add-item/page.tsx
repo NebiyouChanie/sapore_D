@@ -109,13 +109,16 @@ export default function AddMenuItemPage() {
         throw new Error("Failed to add menu item");
       }
   
-      // 2. Trigger on-demand ISR revalidation
-       await fetch("/api/revalidate", {
+      // Trigger on-demand ISR revalidation
+      await fetch("/api/revalidate", {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           "Authorization": `Bearer ${process.env.NEXT_PUBLIC_REVALIDATE_SECRET || "your-strong-secret"}`,
         },
+        body: JSON.stringify({ paths: ["/", "/menu"] }),
       });
+      
   
       toast.success("Menu item added successfully");
       setTimeout(() => {

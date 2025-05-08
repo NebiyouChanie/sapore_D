@@ -127,9 +127,12 @@ export default function Menu() {
       await fetch("/api/revalidate", {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           "Authorization": `Bearer ${process.env.NEXT_PUBLIC_REVALIDATE_SECRET || "your-strong-secret"}`,
         },
+        body: JSON.stringify({ paths: ["/", "/menu"] }),
       });
+      
     } catch (error) {
       console.error("Error updating settings:", error)
       // Revert on error

@@ -180,13 +180,16 @@ export default function UpdateMenuItemPage() {
         throw new Error("Failed to delete menu item")
       }
 
-      // 2. Trigger on-demand ISR revalidation
+      //  Trigger on-demand ISR revalidation
       await fetch("/api/revalidate", {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           "Authorization": `Bearer ${process.env.NEXT_PUBLIC_REVALIDATE_SECRET || "your-strong-secret"}`,
         },
+        body: JSON.stringify({ paths: ["/", "/menu"] }),
       });
+      
 
       toast.success("Menu item deleted successfully")
       router.push("/admin/menu")
