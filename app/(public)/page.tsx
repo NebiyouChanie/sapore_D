@@ -11,7 +11,8 @@ import TestimonialSection from "@/components/usercomponents/TestimonialSection"
 import BookingSection from "@/components/usercomponents/BookingSection"
 
 import { getSpecialItems } from "@/lib/menu";
- export default async function Home() {
+export const dynamic = "force-dynamic";
+export default async function Home() {
   const specialItems = await getSpecialItems();
 
   return (

@@ -34,7 +34,8 @@ interface CategoryWithItems extends Category {
   imageUrl: string;
 }
 
- export default async function MenuPage() {
+export const dynamic = "force-dynamic";
+export default async function MenuPage() {
   const [categories, menuItems] = await Promise.all([
     getCategories(),
     getMenuItems()
