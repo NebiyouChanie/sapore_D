@@ -96,6 +96,7 @@ export default function AddMenuItemPage() {
     try {
       setIsSubmitting(true);
   
+      // 1. Add the menu item as before
       const response = await fetch("/api/menu-items", {
         method: "POST",
         headers: {
@@ -108,12 +109,19 @@ export default function AddMenuItemPage() {
         throw new Error("Failed to add menu item");
       }
   
+      // 2. Trigger on-demand ISR revalidation
+       await fetch("/api/revalidate", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_REVALIDATE_SECRET || "your-strong-secret"}`,
+        },
+      });
   
       toast.success("Menu item added successfully");
       setTimeout(() => {
         window.location.reload();
-      }, 2000);  
-            
+      }, 2000);
+  
     } catch (error) {
       console.log(" error:", error)
       toast.error("Something went wrong. Please try again.");
@@ -121,7 +129,7 @@ export default function AddMenuItemPage() {
       setIsSubmitting(false);
     }
   };
-
+  
   const watchIsSpecial = form.watch("isSpecial")
   const watchName = form.watch("name")
   const watchPrice = form.watch("price")

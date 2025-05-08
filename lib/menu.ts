@@ -11,7 +11,7 @@ function toValidItemType(type: string): ValidItemType {
   return 'starter'; // fallback
 }
 
-// Your existing getMenuItems function, unchanged
+//  getMenuItems function,  
 export async function getMenuItems(isAdmin: boolean = false) {
   try {
     // Fetch menu settings

@@ -122,6 +122,14 @@ export default function Menu() {
       if (!response.ok) {
         throw new Error("Failed to update settings")
       }
+
+      //  Trigger on-demand ISR revalidation
+      await fetch("/api/revalidate", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_REVALIDATE_SECRET || "your-strong-secret"}`,
+        },
+      });
     } catch (error) {
       console.error("Error updating settings:", error)
       // Revert on error

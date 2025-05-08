@@ -148,6 +148,14 @@ export default function UpdateMenuItemPage() {
         throw new Error(errorData.error || "Failed to update menu item")
       }
 
+      // 2. Trigger on-demand ISR revalidation
+      await fetch("/api/revalidate", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_REVALIDATE_SECRET || "your-strong-secret"}`,
+        },
+      });
+
       toast.success("Menu item updated successfully")
       router.push("/admin/menu")
     } catch (error) {
@@ -171,6 +179,14 @@ export default function UpdateMenuItemPage() {
       if (!response.ok) {
         throw new Error("Failed to delete menu item")
       }
+
+      // 2. Trigger on-demand ISR revalidation
+      await fetch("/api/revalidate", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_REVALIDATE_SECRET || "your-strong-secret"}`,
+        },
+      });
 
       toast.success("Menu item deleted successfully")
       router.push("/admin/menu")

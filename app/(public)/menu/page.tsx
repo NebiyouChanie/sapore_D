@@ -1,3 +1,4 @@
+// app/menu/page.tsx
 import Header from "@/components/usercomponents/Header";
 import Image from "next/image";
 import * as motion from "motion/react-client";
@@ -33,7 +34,7 @@ interface CategoryWithItems extends Category {
   imageUrl: string;
 }
 
-export const revalidate = 600; // Regenerate every 10 minutes
+// export const revalidate = 600; // Regenerate every 10 minutes
 export default async function MenuPage() {
   const [categories, menuItems] = await Promise.all([
     getCategories(),

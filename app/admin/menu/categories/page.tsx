@@ -81,6 +81,14 @@ export default function CategoryManagement() {
         throw new Error("Failed to add category")
       }
 
+      // Trigger on-demand ISR revalidation
+      await fetch("/api/revalidate", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_REVALIDATE_SECRET || "your-strong-secret"}`,
+        },
+      });
+
       const newCategory = await response.json()
       setCategories((prev) => [...prev, newCategory])
 

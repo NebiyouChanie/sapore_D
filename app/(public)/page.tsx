@@ -1,3 +1,5 @@
+// app/page.tsx
+
 import Header from '@/components/usercomponents/Home-Header'
 import FoodGallery from "@/components/usercomponents/FoodGrid"
 import HeroSection from "@/components/usercomponents/HeroSection"
@@ -9,7 +11,7 @@ import TestimonialSection from "@/components/usercomponents/TestimonialSection"
 import BookingSection from "@/components/usercomponents/BookingSection"
 
 import { getSpecialItems } from "@/lib/menu";
-export const revalidate = 600; // Regenerate every 10 minutes
+// export const revalidate = 600; // Regenerate every 10 minutes
 export default async function Home() {
   const specialItems = await getSpecialItems();
 
