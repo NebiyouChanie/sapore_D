@@ -60,58 +60,7 @@ export default function AboutUsPage() {
           </div>
         </motion.section>
 
-        {/* Our Chefs Section */}
-        {/* <motion.section 
-          className="py-16 md:py-24 xl:py-48"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="container px-4 md:px-10 xl:px-32 2xl:px-40 mx-auto">
-            <div className="max-w-6xl mx-auto">
-              <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
-                <motion.div 
-                  className="text-center md:text-start"
-                  initial={{ x: -30, opacity: 0 }}
-                  whileInView={{ x: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2, duration: 0.7 }}
-                >
-                  <h2 className="font-playfair text-3xl md:text-4xl font-medium mb-6">Our Chefs</h2>
-                  <p className="text-gray-500 font-light mb-4 text-[18px]">
-                    At Sapore Restaurant, we bring the heart of Italy to Addis Ababa with our passion for authentic
-                    flavors and handcrafted dishes. Known as &#34;The House of 10 Lasagnas&#34;
-                    , we take pride in offering a
-                    unique selection of lasagna alongside a variety of Italian classics, from fresh pasta to wood-fired
-                    pizzas.
-                  </p>
-                  <p className="text-gray-500 font-light mb-4 text-[18px]">
-                    Our team of experienced chefs, trained in traditional Italian cooking techniques, pour their
-                    expertise and creativity into every dish. They carefully select the finest ingredients, combining
-                    imported Italian specialties with fresh local produce to create an authentic yet innovative dining
-                    experience.
-                  </p>
-                </motion.div>
-                <motion.div 
-                  className="relative w-full h-[320px] md:h-[500px] overflow-hidden"
-                  initial={{ x: 30, opacity: 0 }}
-                  whileInView={{ x: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3, duration: 0.8 }}
-                >
-                  <Image
-                    src="/location.jpg"
-                    alt="Restaurant interior"
-                    fill
-                    className="object-cover"
-                  />
-                </motion.div>
-              </div>
-            </div>
-          </div>
-        </motion.section> */}
-
+        
         {/* Our Time Section */}
         <motion.section 
           className="py-16 md:py-24"

@@ -32,7 +32,8 @@ interface CategoryWithItems extends Category {
   items: MenuItem[];
   imageUrl: string;
 }
-export const dynamic = 'force-dynamic'; 
+
+export const revalidate = 600; // Regenerate every 10 minutes
 export default async function MenuPage() {
   const [categories, menuItems] = await Promise.all([
     getCategories(),
