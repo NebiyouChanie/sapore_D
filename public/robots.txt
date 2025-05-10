@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /auth/
+Disallow: /api/admin/
+Disallow: /api/auth/
+
+Allow: /
+
+Sitemap: https://www.saporerestaurant.com/sitemap.xml
