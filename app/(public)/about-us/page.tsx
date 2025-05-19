@@ -1,63 +1,84 @@
 import * as motion from "motion/react-client";
-import Head from "next/head";
 import Header from "@/components/usercomponents/Header";
 import Image from "next/image";
+
+// --- SEO Metadata for Next.js App Router ---
+export const metadata = {
+  title: "About Us - Sapore | Best Italian Restaurant in Addis Ababa",
+  description:
+    "Learn about Sapore, Addis Ababa’s best Italian restaurant offering authentic lasagna, pastas, and a warm dining experience since 2020.",
+  openGraph: {
+    title: "About Us - Sapore | Best Italian Restaurant in Addis Ababa",
+    description:
+      "Learn about Sapore, Addis Ababa’s best Italian restaurant offering authentic lasagna, pastas, and a warm dining experience since 2020.",
+    url: "https://saporerestaurant.com/about-us",
+    type: "website",
+    images: [
+      {
+        url: "https://saporerestaurant.com/hero-section.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Sapore - Authentic Italian Restaurant in Addis Ababa",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us - Sapore | Best Italian Restaurant in Addis Ababa",
+    description:
+      "Learn about Sapore, Addis Ababa’s best Italian restaurant offering authentic lasagna, pastas, and a warm dining experience since 2020.",
+    images: ["https://saporerestaurant.com/hero-section.jpg"],
+  },
+};
 
 export default function AboutUsPage() {
   return (
     <>
-      <Head>
-        <title>About Us - Sapore | Best Italian Restaurant in Addis Ababa</title>
-        <meta
-          name="description"
-          content="Learn about Sapore, Addis Ababa’s best Italian restaurant offering authentic lasagna, pastas, and a warm dining experience since 2020."
-        />
-        {/* JSON-LD Structured Data for Restaurant */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Restaurant",
-              "name": "Sapore",
-              "image": "https://saporerestaurant.com/public/hero-section.jpg",
-              "description":
-                "Sapore is an authentic Italian restaurant in Addis Ababa, known for its lasagna, pasta, and warm atmosphere.",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Your Street Address Here",
-                "addressLocality": "Addis Ababa",
-                "addressRegion": "Addis Ababa",
-                "addressCountry": "ET"
+      {/* JSON-LD Structured Data for Restaurant */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Restaurant",
+            "name": "Sapore",
+            "image": "https://saporerestaurant.com/hero-section.jpg",
+            "description":
+              "Sapore is an authentic Italian restaurant in Addis Ababa, known for its lasagna, pasta, and warm atmosphere.",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Your Street Address Here",
+              "addressLocality": "Addis Ababa",
+              "addressRegion": "Addis Ababa",
+              "addressCountry": "ET",
+            },
+            "telephone": "+251911439712",
+            "url": "https://saporerestaurant.com",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                ],
+                "opens": "07:30",
+                "closes": "22:00",
               },
-              "telephone": "+251911439712",
-              "url": "https://saporerestaurant.com",
-              "openingHoursSpecification": [
-                {
-                  "@type": "OpeningHoursSpecification",
-                  "dayOfWeek": [
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday"
-                  ],
-                  "opens": "07:30",
-                  "closes": "22:00"
-                },
-                {
-                  "@type": "OpeningHoursSpecification",
-                  "dayOfWeek": "Sunday",
-                  "opens": "11:00",
-                  "closes": "22:00"
-                }
-              ],
-              "servesCuisine": "Italian",
-            }),
-          }}
-        />
-      </Head>
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Sunday",
+                "opens": "11:00",
+                "closes": "22:00",
+              },
+            ],
+            "servesCuisine": "Italian",
+          }),
+        }}
+      />
 
       <div className="flex flex-col min-h-screen">
         <Header />

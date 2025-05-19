@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Header from '@/components/usercomponents/Home-Header';
 import FoodGallery from "@/components/usercomponents/FoodGrid";
 import HeroSection from "@/components/usercomponents/HeroSection";
@@ -13,6 +12,35 @@ import { getSpecialItems } from "@/lib/menu";
 
 export const dynamic = "force-dynamic";
 
+// --- SEO Metadata for Next.js App Router ---
+export const metadata = {
+  title: "Sapore | Best Italian Restaurant in Addis Ababa",
+  description:
+    "Experience authentic Italian cuisine at Sapore, Addis Ababa’s premier Italian restaurant. Enjoy delicious lasagna, handmade pasta, wood-fired pizza, and warm hospitality.",
+  openGraph: {
+    title: "Sapore | Best Italian Restaurant in Addis Ababa",
+    description:
+      "Experience authentic Italian cuisine at Sapore, Addis Ababa’s premier Italian restaurant. Enjoy delicious lasagna, handmade pasta, wood-fired pizza, and warm hospitality.",
+    url: "https://saporerestaurant.com",
+    type: "website",
+    images: [
+      {
+        url: "https://saporerestaurant.com/public/hero-section.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Sapore - Authentic Italian Restaurant in Addis Ababa",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sapore | Best Italian Restaurant in Addis Ababa",
+    description:
+      "Experience authentic Italian cuisine at Sapore, Addis Ababa’s premier Italian restaurant. Enjoy delicious lasagna, handmade pasta, wood-fired pizza, and warm hospitality.",
+    images: ["https://saporerestaurant.com/public/hero-section.jpg"],
+  },
+};
+
 export default async function Home() {
   const specialItems = await getSpecialItems();
 
@@ -20,83 +48,49 @@ export default async function Home() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Restaurant",
-    "name": "Sapore",
-    "image": [
-      "https://saporerestaurant.com/public/hero-section.jpg"
-    ],
-    "url": "https://saporerestaurant.com",
-    "telephone": "+251911439712",
-    "address": {
-      "streetAddress": "Zimbabwe Street, Bole",
-      "addressLocality": "Addis Ababa",
-      "addressRegion": "Addis Ababa",
-      "addressCountry": "ET"
+    name: "Sapore",
+    image: ["https://saporerestaurant.com/hero-section.jpg"],
+    url: "https://saporerestaurant.com",
+    telephone: "+251911439712",
+    address: {
+      streetAddress: "Zimbabwe Street, Bole",
+      addressLocality: "Addis Ababa",
+      addressRegion: "Addis Ababa",
+      addressCountry: "ET",
     },
-    "openingHoursSpecification": [
+    openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
+        dayOfWeek: [
           "Monday",
           "Tuesday",
           "Wednesday",
           "Thursday",
           "Friday",
-          "Saturday"
+          "Saturday",
         ],
-        "opens": "07:30",
-        "closes": "22:00"
+        opens: "07:30",
+        closes: "22:00",
       },
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Sunday",
-        "opens": "11:00",
-        "closes": "22:00"
-      }
+        dayOfWeek: "Sunday",
+        opens: "11:00",
+        closes: "22:00",
+      },
     ],
-    "servesCuisine": "Italian",
-    "priceRange": "$$",
-    "sameAs": [
-      "https://www.instagram.com/sapore.restaurant"
-    ]
+    servesCuisine: "Italian",
+    priceRange: "$$",
+    sameAs: ["https://www.instagram.com/sapore.restaurant"],
   };
 
   return (
     <>
-      <Head>
-        <title>Sapore | Best Italian Restaurant in Addis Ababa</title>
-        <meta
-          name="description"
-          content="Experience authentic Italian cuisine at Sapore, Addis Ababa’s premier Italian restaurant. Enjoy delicious lasagna, handmade pasta, wood-fired pizza, and warm hospitality."
-        />
-        {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Sapore | Best Italian Restaurant in Addis Ababa" />
-        <meta
-          property="og:description"
-          content="Experience authentic Italian cuisine at Sapore, Addis Ababa’s premier Italian restaurant. Enjoy delicious lasagna, handmade pasta, wood-fired pizza, and warm hospitality."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://saporerestaurant.com" />
-        <meta
-          property="og:image"
-          content="https://saporerestaurant.com/public/hero-section.jpg"
-        />
-        {/* Twitter Card Meta Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Sapore | Best Italian Restaurant in Addis Ababa" />
-        <meta
-          name="twitter:description"
-          content="Experience authentic Italian cuisine at Sapore, Addis Ababa’s premier Italian restaurant. Enjoy delicious lasagna, handmade pasta, wood-fired pizza, and warm hospitality."
-        />
-        <meta
-          name="twitter:image"
-          content="https://saporerestaurant.com/public/hero-section.jpg"
-        />
-        {/* JSON-LD Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-      </Head>
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
 
       <div className="flex flex-col min-h-screen">
         <Header />

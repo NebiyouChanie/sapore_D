@@ -1,50 +1,69 @@
 import * as motion from "motion/react-client";
-import Head from "next/head";
 import BookingForm from "@/components/usercomponents/BookingForm";
 import Header from "@/components/usercomponents/Header";
 import Image from "next/image";
 
+// --- SEO Metadata for Next.js App Router ---
+export const metadata = {
+  title: "Book a Table - Sapore | Best Italian Restaurant in Addis Ababa",
+  description:
+    "Reserve your table at Sapore, Addis Ababa’s premier Italian restaurant. Enjoy authentic Italian cuisine in a warm and welcoming atmosphere. Book your unforgettable dining experience today!",
+  openGraph: {
+    title: "Book a Table - Sapore | Best Italian Restaurant in Addis Ababa",
+    description:
+      "Reserve your table at Sapore, Addis Ababa’s premier Italian restaurant. Enjoy authentic Italian cuisine in a warm and welcoming atmosphere. Book your unforgettable dining experience today!",
+    url: "https://saporerestaurant.com/booking",
+    type: "website",
+    images: [
+      {
+        url: "https://saporerestaurant.com/public/hero-section.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Sapore - Authentic Italian Restaurant in Addis Ababa",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Book a Table - Sapore | Best Italian Restaurant in Addis Ababa",
+    description:
+      "Reserve your table at Sapore, Addis Ababa’s premier Italian restaurant. Enjoy authentic Italian cuisine in a warm and welcoming atmosphere. Book your unforgettable dining experience today!",
+    images: ["https://saporerestaurant.com/public/hero-section.jpg"],
+  },
+};
+
 export default function Booking() {
   return (
     <>
-      <Head>
-        <title>Book a Table - Sapore | Best Italian Restaurant in Addis Ababa</title>
-        <meta
-          name="description"
-          content="Reserve your table at Sapore, Addis Ababa’s premier Italian restaurant. Enjoy authentic Italian cuisine in a warm and welcoming atmosphere. Book your unforgettable dining experience today!"
-        />
-        {/* JSON-LD Structured Data for Reservation */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Restaurant",
-              "name": "Sapore",
-              "url": "https://saporerestaurant.com/booking",
-              "sameAs": [
-                 "https://www.instagram.com/sapore.restaurant"
-              ],
-              "potentialAction": {
-                "@type": "ReserveAction",
-                "target": {
-                  "@type": "EntryPoint",
-                  "urlTemplate": "https://saporerestaurant.com/booking",
-                  "inLanguage": "en-US",
-                  "actionPlatform": [
-                    "http://schema.org/DesktopWebPlatform",
-                    "http://schema.org/MobileWebPlatform"
-                  ]
-                },
-                "result": {
-                  "@type": "Reservation",
-                  "name": "Table reservation at Sapore"
-                }
-              }
-            }),
-          }}
-        />
-      </Head>
+      {/* JSON-LD Structured Data for Reservation */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Restaurant",
+            name: "Sapore",
+            url: "https://saporerestaurant.com/booking",
+            sameAs: ["https://www.instagram.com/sapore.restaurant"],
+            potentialAction: {
+              "@type": "ReserveAction",
+              target: {
+                "@type": "EntryPoint",
+                urlTemplate: "https://saporerestaurant.com/booking",
+                inLanguage: "en-US",
+                actionPlatform: [
+                  "http://schema.org/DesktopWebPlatform",
+                  "http://schema.org/MobileWebPlatform",
+                ],
+              },
+              result: {
+                "@type": "Reservation",
+                name: "Table reservation at Sapore",
+              },
+            },
+          }),
+        }}
+      />
 
       <div className="flex flex-col min-h-screen">
         <Header />

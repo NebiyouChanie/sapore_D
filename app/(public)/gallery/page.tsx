@@ -1,48 +1,70 @@
 import * as motion from "motion/react-client";
-import Head from "next/head";
 import GridGallery from "@/components/usercomponents/FoodGrid";
 import Header from "@/components/usercomponents/Header";
+
+// --- SEO Metadata for Next.js App Router ---
+export const metadata = {
+  title: "Gallery - Sapore | Authentic Italian Restaurant in Addis Ababa",
+  description:
+    "Explore the gallery of Sapore, showcasing our delicious Italian dishes including pasta, lasagna, and wood-fired pizza served in Addis Ababa.",
+  openGraph: {
+    title: "Gallery - Sapore | Authentic Italian Restaurant in Addis Ababa",
+    description:
+      "Explore the gallery of Sapore, showcasing our delicious Italian dishes including pasta, lasagna, and wood-fired pizza served in Addis Ababa.",
+    url: "https://saporerestaurant.com/gallery",
+    type: "website",
+    images: [
+      {
+        url: "https://saporerestaurant.com/public/hero-section.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Gallery of Italian dishes and ambiance at Sapore Restaurant",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Gallery - Sapore | Authentic Italian Restaurant in Addis Ababa",
+    description:
+      "Explore the gallery of Sapore, showcasing our delicious Italian dishes including pasta, lasagna, and wood-fired pizza served in Addis Ababa.",
+    images: ["https://saporerestaurant.com/public/hero-section.jpg"],
+  },
+};
 
 export default function GalleryPage() {
   return (
     <>
-      <Head>
-        <title>Gallery - Sapore | Authentic Italian Restaurant in Addis Ababa</title>
-        <meta
-          name="description"
-          content="Explore the gallery of Sapore, showcasing our delicious Italian dishes including pasta, lasagna, and wood-fired pizza served in Addis Ababa."
-        />
-        {/* Structured Data for Gallery Page */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "CollectionPage",
-              "name": "Gallery - Sapore",
-              "description":
-                "A collection of images showcasing the authentic Italian dishes and cozy ambiance of Sapore restaurant in Addis Ababa.",
-              "mainEntity": [
-                //  {
-                //   "@type": "ImageObject",
-                //   "contentUrl": "https://saporerestaurant.com/images/lasagna.jpg",
-                //   "description": "Delicious homemade lasagna at Sapore restaurant"
-                // },
-                // {
-                //   "@type": "ImageObject",
-                //   "contentUrl": "https://saporerestaurant.com/images/pasta.jpg",
-                //   "description": "Fresh handmade pasta served at Sapore"
-                // },
-                // {
-                //   "@type": "ImageObject",
-                //   "contentUrl": "https://saporerestaurant.com/images/restaurant-interior.jpg",
-                //   "description": "Cozy interior of Sapore restaurant"
-                // }
-              ]
-            }),
-          }}
-        />
-      </Head>
+      {/* Structured Data for Gallery Page */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: "Gallery - Sapore",
+            description:
+              "A collection of images showcasing the authentic Italian dishes and cozy ambiance of Sapore restaurant in Addis Ababa.",
+            mainEntity: [
+              // Uncomment and replace with actual image URLs and descriptions if available
+              // {
+              //   "@type": "ImageObject",
+              //   contentUrl: "https://saporerestaurant.com/images/lasagna.jpg",
+              //   description: "Delicious homemade lasagna at Sapore restaurant",
+              // },
+              // {
+              //   "@type": "ImageObject",
+              //   contentUrl: "https://saporerestaurant.com/images/pasta.jpg",
+              //   description: "Fresh handmade pasta served at Sapore",
+              // },
+              // {
+              //   "@type": "ImageObject",
+              //   contentUrl: "https://saporerestaurant.com/images/restaurant-interior.jpg",
+              //   description: "Cozy interior of Sapore restaurant",
+              // },
+            ],
+          }),
+        }}
+      />
 
       <div className="flex flex-col min-h-screen">
         <Header />
@@ -63,9 +85,7 @@ export default function GalleryPage() {
                 transition={{ delay: 0.2, duration: 0.6 }}
               >
                 <header>
-                  <motion.h1
-                    className="font-playfair text-4xl md:text-6xl xl:text-[90px] mb-6 xl:mb-0"
-                  >
+                  <motion.h1 className="font-playfair text-4xl md:text-6xl xl:text-[90px] mb-6 xl:mb-0">
                     Gallery
                   </motion.h1>
                 </header>

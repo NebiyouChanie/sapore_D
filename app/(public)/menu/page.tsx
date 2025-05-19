@@ -1,5 +1,4 @@
 // app/menu/page.tsx
-import Head from "next/head";
 import Header from "@/components/usercomponents/Header";
 import Image from "next/image";
 import * as motion from "motion/react-client";
@@ -36,6 +35,35 @@ interface CategoryWithItems extends Category {
 
 export const dynamic = "force-dynamic";
 
+// --- SEO Metadata for Next.js App Router ---
+export const metadata = {
+  title: "Menu - Sapore | Best Italian Restaurant in Addis Ababa",
+  description:
+    "Explore Sapore’s menu blending Italian tradition with bold flavors. Enjoy crispy pizzas, rich pastas, specialty lasagnas, fresh salads, and Ethiopian favorites in Addis Ababa.",
+  openGraph: {
+    title: "Menu - Sapore | Best Italian Restaurant in Addis Ababa",
+    description:
+      "Explore Sapore’s menu blending Italian tradition with bold flavors. Enjoy crispy pizzas, rich pastas, specialty lasagnas, fresh salads, and Ethiopian favorites in Addis Ababa.",
+    url: "https://saporerestaurant.com/menu",
+    type: "website",
+    images: [
+      {
+        url: "https://saporerestaurant.com/public/hero-section.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Sapore - Authentic Italian Restaurant in Addis Ababa",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Menu - Sapore | Best Italian Restaurant in Addis Ababa",
+    description:
+      "Explore Sapore’s menu blending Italian tradition with bold flavors. Enjoy crispy pizzas, rich pastas, specialty lasagnas, fresh salads, and Ethiopian favorites in Addis Ababa.",
+    images: ["https://saporerestaurant.com/public/hero-section.jpg"],
+  },
+};
+
 export default async function MenuPage() {
   const [categories, menuItems] = await Promise.all([getCategories(), getMenuItems()]);
 
@@ -55,19 +83,20 @@ export default async function MenuPage() {
   const menuStructuredData = {
     "@context": "https://schema.org",
     "@type": "Menu",
-    "name": "Sapore Menu",
-    "url": "https://saporerestaurant.com/menu",
-    "hasMenuSection": categoriesWithItems.map((category) => ({
+    name: "Sapore Menu",
+    url: "https://saporerestaurant.com/menu",
+    hasMenuSection: categoriesWithItems.map((category) => ({
       "@type": "MenuSection",
-      "name": category.name,
-      "hasMenuItem": category.items.map((item) => ({
+      name: category.name,
+      hasMenuItem: category.items.map((item) => ({
         "@type": "MenuItem",
-        "name": item.name,
-        "description": item.description || "",
-        "image": item.imageUrl,
-        "offers": {
+        name: item.name,
+        description: item.description || "",
+        image: item.imageUrl,
+        offers: {
           "@type": "Offer",
-          "price": item.price?.toFixed(2) || "0.00",
+          price: item.price?.toFixed(2) || "0.00",
+          priceCurrency: "USD", // Change currency if needed
         },
       })),
     })),
@@ -75,17 +104,11 @@ export default async function MenuPage() {
 
   return (
     <>
-      <Head>
-        <title>Menu - Sapore | Best Italian Restaurant in Addis Ababa</title>
-        <meta
-          name="description"
-          content="Explore Sapore’s menu blending Italian tradition with bold flavors. Enjoy crispy pizzas, rich pastas, specialty lasagnas, fresh salads, and Ethiopian favorites in Addis Ababa."
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(menuStructuredData) }}
-        />
-      </Head>
+      {/* JSON-LD Structured Data for Menu */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(menuStructuredData) }}
+      />
 
       <div className="flex flex-col min-h-screen">
         <Header />

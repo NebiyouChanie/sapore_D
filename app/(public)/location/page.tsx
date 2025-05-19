@@ -1,68 +1,90 @@
 import * as motion from "motion/react-client";
-import Head from "next/head";
 import Header from "@/components/usercomponents/Header";
 import Link from "next/link";
 import LocationCarousel from "@/components/usercomponents/LocationCarousel";
 
+// --- SEO Metadata for Next.js App Router ---
+export const metadata = {
+  title: "Location - Sapore | Best Italian Restaurant in Addis Ababa",
+  description:
+    "Find Sapore Italian Restaurant located in Bole on Zimbabwe Street, Addis Ababa. Easily accessible by bus or taxi with ample parking. Call +251 91 143 9712 to book a table.",
+  openGraph: {
+    title: "Location - Sapore | Best Italian Restaurant in Addis Ababa",
+    description:
+      "Find Sapore Italian Restaurant located in Bole on Zimbabwe Street, Addis Ababa. Easily accessible by bus or taxi with ample parking. Call +251 91 143 9712 to book a table.",
+    url: "https://saporerestaurant.com/location",
+    type: "website",
+    images: [
+      {
+        url: "https://saporerestaurant.com/hero-section.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Sapore - Authentic Italian Restaurant in Addis Ababa",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Location - Sapore | Best Italian Restaurant in Addis Ababa",
+    description:
+      "Find Sapore Italian Restaurant located in Bole on Zimbabwe Street, Addis Ababa. Easily accessible by bus or taxi with ample parking. Call +251 91 143 9712 to book a table.",
+    images: ["https://saporerestaurant.com/hero-section.jpg"],
+  },
+};
+
 export default function Location() {
   return (
     <>
-      <Head>
-        <title>Location - Sapore | Best Italian Restaurant in Addis Ababa</title>
-        <meta
-          name="description"
-          content="Find Sapore Italian Restaurant located in Bole on Zimbabwe Street, Addis Ababa. Easily accessible by bus or taxi with ample parking. Call +251 91 143 9712 to book a table."
-        />
-        {/* JSON-LD Structured Data for Restaurant Location */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Restaurant",
-              "name": "Sapore",
-              "image": "https://saporerestaurant.com/public/hero-section.jpg",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Zimbabwe Street, Bole",
-                "addressLocality": "Addis Ababa",
-                "addressRegion": "Addis Ababa",
-                "addressCountry": "ET"
+      {/* JSON-LD Structured Data for Restaurant Location */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Restaurant",
+            name: "Sapore",
+            image: "https://saporerestaurant.com/hero-section.jpg",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "Zimbabwe Street, Bole",
+              addressLocality: "Addis Ababa",
+              addressRegion: "Addis Ababa",
+              addressCountry: "ET",
+            },
+            telephone: "+251911439712",
+            url: "https://saporerestaurant.com",
+            geo: {
+              "@type": "GeoCoordinates",
+              latitude: 8.9903271,
+              longitude: 38.7825205,
+            },
+            hasMap:
+              "https://www.google.com/maps/place/Sapore+Restaurant/@8.9903271,38.7825205,17z",
+            openingHoursSpecification: [
+              {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                ],
+                opens: "07:30",
+                closes: "22:00",
               },
-              "telephone": "+251911439712",
-              "url": "https://saporerestaurant.com",
-              "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": 8.9903271,
-                "longitude": 38.7825205
+              {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: "Sunday",
+                opens: "11:00",
+                closes: "22:00",
               },
-              "hasMap": "https://www.google.com/maps/place/Sapore+Restaurant/@8.9903271,38.7825205,17z",
-              "openingHoursSpecification": [
-                {
-                  "@type": "OpeningHoursSpecification",
-                  "dayOfWeek": [
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday"
-                  ],
-                  "opens": "07:30",
-                  "closes": "22:00"
-                },
-                {
-                  "@type": "OpeningHoursSpecification",
-                  "dayOfWeek": "Sunday",
-                  "opens": "11:00",
-                  "closes": "22:00"
-                }
-              ],
-              "servesCuisine": "Italian",
-             }),
-          }}
-        />
-      </Head>
+            ],
+            servesCuisine: "Italian",
+          }),
+        }}
+      />
 
       <div className="flex flex-col min-h-screen">
         <Header />
@@ -97,7 +119,10 @@ export default function Location() {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.4, duration: 0.7 }}
                   >
-                    Located in Bole on Zimbabwe Street, Sapore Restaurant is a welcoming place for meals with family, friends, or special events. It&apos;s easy to reach by bus or taxi, and has good parking space. Call +251 91 143 9712 to book a table.
+                    Located in Bole on Zimbabwe Street, Sapore Restaurant is a welcoming
+                    place for meals with family, friends, or special events. It&apos;s
+                    easy to reach by bus or taxi, and has good parking space. Call +251
+                    91 143 9712 to book a table.
                   </motion.p>
                 </div>
               </motion.article>
@@ -117,7 +142,8 @@ export default function Location() {
                   className="border-0"
                 ></iframe>
                 <figcaption className="sr-only">
-                  Google map showing location of Sapore Restaurant in Addis Ababa, Bole, Zimbabwe Street.
+                  Google map showing location of Sapore Restaurant in Addis Ababa, Bole,
+                  Zimbabwe Street.
                 </figcaption>
               </motion.figure>
 
