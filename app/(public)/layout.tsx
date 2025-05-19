@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "../globals.css";
 import Footer from "@/components/usercomponents/Footer";
@@ -21,13 +20,14 @@ export const metadata = {
     default: "Sapore | Best Italian Restaurant in Addis Ababa",
     template: "%s - Sapore",
   },
-  description: "Sapore is Addis Ababa’s premier Italian restaurant, known for its authentic flavors and the best lasagna in the city. Experience the true taste of Italy today.",
-  keywords: "best Italian restaurant Addis, lasagna in Addis Ababa, Italian food Ethiopia, Sapore menu, pasta and pizza Addis",
+  description:
+    "Sapore is Addis Ababa’s premier Italian restaurant offering authentic Italian dishes like lasagna, pasta, and wood-fired pizza. Experience true Italian flavors today.",
   openGraph: {
     title: "Sapore | Best Italian Restaurant in Addis Ababa",
-    description: "Taste the finest Italian cuisine in Addis Ababa. Sapore is home to the city's most beloved lasagna and a menu full of traditional favorites.",
+    description:
+      "Taste authentic Italian cuisine at Sapore. Enjoy the best lasagna, pasta, and pizza in Addis Ababa with a cozy, family-friendly atmosphere.",
     url: "https://saporerestaurant.com",
-    type: "website",
+    type: "restaurant",
     images: [
       {
         url: "https://saporerestaurant.com/public/hero-section.jpg",
@@ -37,7 +37,15 @@ export const metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sapore | Best Italian Restaurant in Addis Ababa",
+    description:
+      "Enjoy authentic Italian dishes including lasagna, pasta, and pizza at Sapore, Addis Ababa's favorite Italian spot.",
+    images: ["https://saporerestaurant.com/public/hero-section.jpg"],
+  },
 };
+
 
 
 export default function RootLayout({
