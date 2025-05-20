@@ -16,7 +16,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "https://saporerestaurant.com/public/hero-section.jpg",
+        url: "https://saporerestaurant.com/hero-section.jpg",
         width: 1200,
         height: 630,
         alt: "Sapore - Authentic Italian Restaurant in Addis Ababa",
@@ -28,7 +28,7 @@ export const metadata = {
     title: "Book a Table - Sapore | Best Italian Restaurant in Addis Ababa",
     description:
       "Reserve your table at Sapore, Addis Ababa’s premier Italian restaurant. Enjoy authentic Italian cuisine in a warm and welcoming atmosphere. Book your unforgettable dining experience today!",
-    images: ["https://saporerestaurant.com/public/hero-section.jpg"],
+    images: ["https://saporerestaurant.com/hero-section.jpg"],
   },
 };
 

@@ -15,7 +15,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "https://saporerestaurant.com/public/hero-section.jpg",
+        url: "https://saporerestaurant.com/hero-section.jpg",
         width: 1200,
         height: 630,
         alt: "Gallery of Italian dishes and ambiance at Sapore Restaurant",
@@ -27,7 +27,7 @@ export const metadata = {
     title: "Gallery - Sapore | Authentic Italian Restaurant in Addis Ababa",
     description:
       "Explore the gallery of Sapore, showcasing our delicious Italian dishes including pasta, lasagna, and wood-fired pizza served in Addis Ababa.",
-    images: ["https://saporerestaurant.com/public/hero-section.jpg"],
+    images: ["https://saporerestaurant.com/hero-section.jpg"],
   },
 };
 
