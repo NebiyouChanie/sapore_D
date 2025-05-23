@@ -44,6 +44,18 @@ export const metadata = {
     title: "Menu - Sapore | Best Italian Restaurant in Addis Ababa",
     description:
       "Explore Sapore’s menu blending Italian tradition with bold flavors. Enjoy crispy pizzas, rich pastas, specialty lasagnas, fresh salads, and Ethiopian favorites in Addis Ababa.",
+    keywords: [
+      "Sapore menu Addis Ababa",
+      "Italian menu Addis Ababa",
+      "pasta menu Addis Ababa",
+      "pizza menu Addis Ababa",
+      "lasagna Addis Ababa",
+      "Italian food menu Ethiopia",
+      "best pasta in Addis Ababa",
+      "best pizza in Addis Ababa",
+      "vegetarian Italian food Addis"
+    ].join(", "),
+
     url: "https://saporerestaurant.com/menu",
     type: "website",
     images: [

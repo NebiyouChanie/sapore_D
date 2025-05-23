@@ -12,6 +12,15 @@ export const metadata = {
     title: "Location - Sapore | Best Italian Restaurant in Addis Ababa",
     description:
       "Find Sapore Italian Restaurant located in Bole on Zimbabwe Street, Addis Ababa. Easily accessible by bus or taxi with ample parking. Call +251 91 143 9712 to book a table.",
+    keywords: [
+      "Italian restaurant Bole Addis Ababa",
+      "restaurants near Zimbabwe Street Addis Ababa",
+      "Italian restaurants near me Addis Ababa",
+      "Sapore location Addis Ababa",
+      "how to get to Sapore Addis Ababa",
+      "parking Italian restaurant Addis"
+    ].join(", "),
+
     url: "https://saporerestaurant.com/location",
     type: "website",
     images: [

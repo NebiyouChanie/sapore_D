@@ -12,6 +12,15 @@ export const metadata = {
     title: "Book a Table - Sapore | Best Italian Restaurant in Addis Ababa",
     description:
       "Reserve your table at Sapore, Addis Ababa’s premier Italian restaurant. Enjoy authentic Italian cuisine in a warm and welcoming atmosphere. Book your unforgettable dining experience today!",
+    keywords: [
+      "book table Italian restaurant Addis Ababa",
+      "reserve table Sapore Addis Ababa",
+      "restaurant reservation Addis Ababa",
+      "group dining Addis Ababa",
+      "event booking Italian restaurant Addis",
+      "Italian restaurant for parties Addis"
+    ].join(", "),
+
     url: "https://saporerestaurant.com/booking",
     type: "website",
     images: [

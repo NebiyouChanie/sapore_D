@@ -17,10 +17,20 @@ export const metadata = {
   title: "Sapore | Best Italian Restaurant in Addis Ababa",
   description:
     "Experience authentic Italian cuisine at Sapore, Addis Ababa’s premier Italian restaurant. Enjoy delicious lasagna, handmade pasta, wood-fired pizza, and warm hospitality.",
-  openGraph: {
+       openGraph: {
     title: "Sapore | Best Italian Restaurant in Addis Ababa",
     description:
       "Experience authentic Italian cuisine at Sapore, Addis Ababa’s premier Italian restaurant. Enjoy delicious lasagna, handmade pasta, wood-fired pizza, and warm hospitality.",
+    keywords: [
+      "best Italian restaurant Addis Ababa",
+      "Italian food Addis Ababa",
+      "restaurants in Bole Addis Ababa",
+      "authentic Italian cuisine Ethiopia",
+      "Addis Ababa dining",
+      "family restaurant Addis Ababa",
+      "Sapore restaurant Addis Ababa"
+    ].join(", "),
+
     url: "https://saporerestaurant.com",
     type: "website",
     images: [

@@ -11,6 +11,14 @@ export const metadata = {
     title: "Gallery - Sapore | Authentic Italian Restaurant in Addis Ababa",
     description:
       "Explore the gallery of Sapore, showcasing our delicious Italian dishes including pasta, lasagna, and wood-fired pizza served in Addis Ababa.",
+    keywords: [
+      "Sapore food gallery",
+      "Italian dishes photos Addis Ababa",
+      "restaurant interior Addis Ababa",
+      "Italian cuisine images Ethiopia",
+      "Addis Ababa restaurant gallery"
+    ].join(", "),
+
     url: "https://saporerestaurant.com/gallery",
     type: "website",
     images: [
