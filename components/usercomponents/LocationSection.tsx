@@ -5,7 +5,7 @@ import LocationCarousel from "./LocationCarousel";
 
 function LocationSection() {
   return (
-    <section id="location" className="py-16 md:py-24 lg:py-48">
+    <section id="location" className="py-16 md:py-24 lg:py-48 overflow-x-hidden">
       <div className="container px-4 md:px-10 xl:px-32 2xl:px-40 mx-auto">
         <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center ">
           
@@ -24,16 +24,16 @@ function LocationSection() {
               or special celebrations.
             </p>
             <div className="space-y-3">
-              <div className="flex items-start gap-3 ">
+              <div className="flex justify-center md:justify-start gap-3 ">
                 <MapPin className="text-gray-500 mt-1 shrink-0" size={18} />
                 <p className="text-gray-500 font-light text-[18px] ">Sapore Restaurant, Zimbabwe St, Addis Ababa</p>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex justify-center md:justify-start gap-3">
                 <Phone className="text-gray-500 shrink-0" size={18} />
                 <p className="text-gray-500 font-light text-[18px] ">+251 91 143 9712</p>
               </div>
             </div>
-            <div className="flex">
+            <div className="flex justify-center md:justify-start">
               <Link href='https://maps.app.goo.gl/4wmhy7Mi6CVzAwXk6'>
                 <button
                   className="bg-black font-medium hover:bg-transparent hover:text-black border border-black text-white py-2 px-6 text-sm transition-colors w-fit mt-6"

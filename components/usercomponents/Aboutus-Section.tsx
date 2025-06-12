@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function AboutusSection() {
   return (
-    <section id="about" className="py-16 md:py-24">
+    <section id="about" className="py-16 md:py-24 overflow-x-hidden">
       <div className="container px-4 md:px-10 xl:px-32 2xl:px-40 mx-auto">
         <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
           {/* Text Section with Motion */}

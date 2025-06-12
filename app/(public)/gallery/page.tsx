@@ -1,6 +1,8 @@
 import * as motion from "motion/react-client";
-import GridGallery from "@/components/usercomponents/FoodGrid";
+import GridGallery from "@/components/usercomponents/GridGallery";
 import Header from "@/components/usercomponents/Header";
+import GalleryGrid1 from "@/components/usercomponents/GalleryGrid1";
+import TraditionalGrid from "@/components/usercomponents/TraditionalGrid";
 
 // --- SEO Metadata for Next.js App Router ---
 export const metadata = {
@@ -104,10 +106,9 @@ export default function GalleryPage() {
                 aria-label="Gallery of Italian dishes and restaurant ambiance at Sapore"
               >
                 {/* Assuming GridGallery handles alt attributes for images */}
+                <GalleryGrid1 />
                 <GridGallery />
-                <GridGallery />
-                <GridGallery />
-                <GridGallery />
+                <TraditionalGrid />
               </article>
             </div>
           </motion.section>

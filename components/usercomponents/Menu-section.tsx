@@ -4,7 +4,7 @@ import Image from "next/image";
 
 function MenuSection() {
   return (
-    <section id="menu" className="py-16 md:py-24 xl:pb-32">
+    <section id="menu" className="py-16 md:py-24 xl:pb-32 overflow-x-hidden">
       <div className="container px-4 md:px-10 xl:px-32 2xl:px-40 mx-auto">
         <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
           {/* Image Section with Motion */}

@@ -6,17 +6,17 @@ interface GridGalleryProps {
   className?: string;
 }
 
-export default function GridGallery({ className }: GridGalleryProps) {
+export default function FastFoodGrid({ className }: GridGalleryProps) {
   // Direct import of images - adjust these paths to match your project structure
   const images = [
-    { src: "/gallarey1.jpg", alt: "Gallery image 1" },
-    { src: "/gallarey2.jpg", alt: "Gallery image 2" },
-    { src: "/gallarey3.jpg", alt: "Gallery image 3" },
-    { src: "/gallarey4.jpg", alt: "Gallery image 4" },
-    { src: "/gallarey5.jpg", alt: "Gallery image 5" },
-    { src: "/gallarey6.jpg", alt: "Gallery image 6" },
-    { src: "/gallarey7.jpg", alt: "Gallery image 7" },
-    { src: "/gallarey8.jpg", alt: "Gallery image 8" },
+    { src: "/burger1.webp", alt: "The best Club Sandwich in addis ababa" },
+    { src: "/burger2.webp", alt: "The best Lasagna Verde in addis ababa" },
+    { src: "/burger3.webp", alt: "The best Beef Lasagna in addis ababa" },
+    { src: "/burger4.webp", alt: "The best Burger in addis ababa" },
+    { src: "/burger5.webp", alt: "The best Crispy Fish Burger in addis ababa" },
+    { src: "/burger6.webp", alt: "The best Tuna Sandwich in addis ababa" },
+    { src: "/burger7.webp", alt: "The best Cheese Burger in addis ababa" },
+    { src: "/burger8.webp", alt: "The best Mammamia Burger in addis ababa" },
   ];
 
   // For demonstration, we'll use placeholder images if the actual images aren't available

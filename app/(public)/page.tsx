@@ -1,5 +1,5 @@
 import Header from '@/components/usercomponents/Home-Header';
-import FoodGallery from "@/components/usercomponents/FoodGrid";
+import FoodGallery from "@/components/usercomponents/GridGallery";
 import HeroSection from "@/components/usercomponents/HeroSection";
 import AboutusSection from "@/components/usercomponents/Aboutus-Section";
 import SpecialsSection from "@/components/usercomponents/SpecialsSection";

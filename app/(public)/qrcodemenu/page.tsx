@@ -1,6 +1,8 @@
 // app/menu/page.tsx
 import Header from "@/components/usercomponents/Header";
+import Image from "next/image";
 import * as motion from "motion/react-client";
+import QuickLinks from "@/components/QuickLinks";
 
 interface Category {
   id: string;
@@ -25,12 +27,6 @@ interface MenuItem {
 
 import { fetchCategories as getCategories } from "@/lib/categories";
 import { getMenuItems } from "@/lib/menu";
-import LasagnaGrid from "@/components/usercomponents/LasagnaGrid";
-import PastaGrid from "@/components/usercomponents/PastaGrid";
-import PizzaGrid from "@/components/usercomponents/PizzaGrid";
-import TraditionalGrid from "@/components/usercomponents/TraditionalGrid";
-import SaladGrid from "@/components/usercomponents/SaladGrid";
-import FastFoodGrid from "@/components/usercomponents/FastFoodGrid";
 
 interface CategoryWithItems extends Category {
   items: MenuItem[];
@@ -162,85 +158,99 @@ export default async function MenuPage() {
                     We blend Italian tradition with bold flavors and fresh ingredients, offering crispy pizzas like Quattro Formaggi and Pepperoni, rich pastas such as Chicken Alfredo and Pesto Pasta with Fish, and specialty lasagnas like Sapore Lasagna and Beef Lasagna, alongside juicy burgers, fresh salads, and Ethiopian favorites like Chigina Tibs and Shiro. All crafted for sharing and satisfaction.
                   </motion.p>
                 </header>
-               </motion.article>
+
+                {categories.length > 0 && <QuickLinks categories={categories} />}
+              </motion.article>
             </div>
           </motion.section>
 
           {/* Menu Categories Section */}
           <section className="pb-20">
-            <div className="container px-4 md:px-10 xl:px-32 2xl:px-40 mx-auto flex flex-col gap-12 md:gap-20">
-              <div>
-                <motion.p
-                            className="text-2xl md:text-3xl md:font-medium font-playfair mb-2"
-                            initial={{ opacity: 0, y: 100 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-                            viewport={{ once: true, amount: 0.3 }}
+            <div className="container px-4 md:px-10 xl:px-32 2xl:px-40 mx-auto">
+              {categoriesWithItems.length > 0 ? (
+                categoriesWithItems.map((category: CategoryWithItems, catIndex: number) => (
+                  <motion.section
+                    key={category.id}
+                    id={category.name.toLowerCase().replace(/\s+/g, "-")}
+                    className="mb-20 scroll-mt-32"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ delay: catIndex * 0.1, duration: 0.6 }}
+                  >
+                    <div className="grid md:grid-cols-[300px_1fr] gap-8">
+                      {/* Category Image */}
+                      <motion.figure
+                        className="relative h-[400px] rounded-lg overflow-hidden"
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                      >
+                        <Image
+                          src={category.imageUrl}
+                          alt={`Image representing ${category.name} category`}
+                          fill
+                          className="object-cover"
+                          priority
+                          sizes="(max-width: 768px) 100vw, 300px"
+                        />
+                        <figcaption className="absolute inset-0 bg-black/30 flex items-center justify-center p-6 text-white font-playfair text-4xl font-medium">
+                          {category.name}
+                        </figcaption>
+                      </motion.figure>
+
+                      {/* Menu Items */}
+                      <article className="space-y-6" aria-label={`${category.name} menu items`}>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                          {category.items.map((item: MenuItem, itemIndex: number) => (
+                            <motion.article
+                              key={item.id}
+                              className="flex gap-4 group"
+                              initial={{ opacity: 0, x: -20 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: itemIndex * 0.05, duration: 0.5 }}
+                            >
+                              <motion.div
+                                className="relative w-20 h-20 rounded-md overflow-hidden shrink-0"
+                                whileHover={{ scale: 1.1 }}
+                              >
+                                <Image
+                                  src={item.imageUrl || "/placeholder.svg"}
+                                  alt={item.name}
+                                  fill
+                                  className="object-cover group-hover:scale-105 transition-transform"
+                                  sizes="80px"
+                                />
+                              </motion.div>
+                              <div>
+                                <div className="flex justify-between">
+                                  <h3 className="font-playfair font-bold">{item.name}</h3>
+                                  <span className="font-medium">
+                                    {item?.price ? item.price.toFixed(2) : "N/A"}
+                                  </span>
+                                </div>
+                                <p className="text-sm text-gray-600 mt-1">{item.description}</p>
+                              </div>
+                            </motion.article>
+                          ))}
+                        </div>
+                      </article>
+                    </div>
+                  </motion.section>
+                ))
+              ) : (
+                <motion.div
+                  className="text-center py-20"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8 }}
                 >
-                  Lasagna
-                </motion.p>
-                <LasagnaGrid />
-              </div>
-              <div>
-                <motion.p
-                            className="text-2xl md:text-3xl md:font-medium font-playfair mb-2"
-                            initial={{ opacity: 0, y: 100 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-                            viewport={{ once: true, amount: 0.3 }}
-                >
-                  Pasta
-                </motion.p>
-                <PastaGrid />
-              </div>
-              <div>
-                <motion.p
-                            className="text-2xl md:text-3xl md:font-medium font-playfair mb-2"
-                            initial={{ opacity: 0, y: 100 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-                            viewport={{ once: true, amount: 0.3 }}
-                >
-                  Pizza
-                </motion.p>
-                <PizzaGrid />
-              </div>
-              <div>
-                <motion.p
-                            className="text-2xl md:text-3xl md:font-medium font-playfair mb-2"
-                            initial={{ opacity: 0, y: 100 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-                            viewport={{ once: true, amount: 0.3 }}
-                >
-                  Fast Food
-                </motion.p>
-                 <FastFoodGrid />
-              </div>
-              <div>
-                <motion.p
-                            className="text-2xl md:text-3xl md:font-medium font-playfair mb-2"
-                            initial={{ opacity: 0, y: 100 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-                            viewport={{ once: true, amount: 0.3 }}
-                >
-                  Salad
-                </motion.p>
-                <SaladGrid />
-              </div>
-              <div>
-                <motion.p
-                            className="text-2xl md:text-3xl md:font-medium font-playfair mb-2"
-                            initial={{ opacity: 0, y: 100 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-                            viewport={{ once: true, amount: 0.3 }}
-                >
-                  Traditional
-                </motion.p>
-                <TraditionalGrid />
-              </div>
+                  <h2 className="text-2xl font-bold mb-4">Menu Not Available</h2>
+                  <p className="text-gray-600">
+                    We are having trouble loading our menu. Please try again later.
+                  </p>
+                </motion.div>
+              )}
             </div>
           </section>
         </main>

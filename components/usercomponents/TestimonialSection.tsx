@@ -4,7 +4,7 @@ import Image from "next/image"
 
 function TestimonialSection() {
   return (
-    <section className="py-20 md:py-24 bg-gray-800 text-white relative">
+    <section className="py-20 md:py-24 bg-gray-800 text-white relative overflow-x-hidden">
       {/* Background Image with Overlay */}
       <div 
         className="absolute inset-0"
