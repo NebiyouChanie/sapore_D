@@ -213,7 +213,7 @@ export default async function MenuPage() {
                             transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
                             viewport={{ once: true, amount: 0.3 }}
                 >
-                  Fast Food
+                  Burger
                 </motion.p>
                  <FastFoodGrid />
               </div>
@@ -237,7 +237,7 @@ export default async function MenuPage() {
                             transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
                             viewport={{ once: true, amount: 0.3 }}
                 >
-                  Traditional
+                  Combo
                 </motion.p>
                 <TraditionalGrid />
               </div>
