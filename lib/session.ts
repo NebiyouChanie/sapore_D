@@ -48,16 +48,18 @@ export async function createSession(email: string) {
 
 }
 
-// Verify session function
+// lib/session.ts
 export async function verifySession() {
   const session = (await cookies()).get('session')?.value;
+  
+  // Instead of redirecting, return null/false when no session
   if (!session) {
-    redirect('/admin');  
+    return null;
   }
 
   const payload = await decrypt(session);
   if (!payload) {
-    redirect('/admin');  
+    return null;
   }
 
   return { email: payload.email };
