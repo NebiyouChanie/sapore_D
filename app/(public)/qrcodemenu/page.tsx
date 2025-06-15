@@ -122,8 +122,46 @@ export default async function MenuPage() {
       />
 
       <div className="flex flex-col min-h-screen">
+
         <main className="flex-1">
           {/* Menu Hero Section */}
+          <motion.section
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="container px-4 md:px-10 xl:px-32 2xl:px-40 mx-auto">
+              <motion.article
+                className=""
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+              >
+                <header className="flex flex-col xl:flex-row xl:gap-8 xl:items-center">
+                  <motion.h1
+                    className="font-playfair text-4xl md:text-6xl xl:text-[90px] mb-6 xl:mb-0 flex  gap-4 items-center"
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.3, duration: 0.7 }}
+                  >
+                    <div className="rounded-full w-[60px] h-[60px] xl:w-[80px] xl:h-[80px] relative">
+                      <Image
+                        src="/sapore-logo.svg"
+                        alt="Sapore Logo"
+                        layout="fill"
+                        objectFit="cover"
+                        className="rounded-full"
+                      />
+                    </div>
+                    <p>
+                      Menu
+                    </p>
+                  </motion.h1>
+                </header>
+              </motion.article>
+            </div>
+          </motion.section>
+
           {/* Sticky Quick Links */}
           <div className="sticky top-0 z-10 bg-white shadow-md">
             <div className="container px-4 md:px-10 xl:px-32 2xl:px-40 mx-auto">
@@ -132,7 +170,7 @@ export default async function MenuPage() {
           </div>
 
           {/* Menu Categories Section */}
-          <section className="pb-20">
+          <section className="pb-20 pt-8">
             <div className="container px-4 md:px-10 xl:px-32 2xl:px-40 mx-auto">
               {categoriesWithItems.length > 0 ? (
                 categoriesWithItems.map((category: CategoryWithItems, catIndex: number) => (
