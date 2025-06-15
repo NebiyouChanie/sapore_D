@@ -16,7 +16,7 @@ export default function QuickLinks({ categories }: { categories: Category[] }) {
       animate={{ opacity: 1 }}
       transition={{ delay: 0.5, duration: 0.8 }}
     >
-      <h2 className="font-medium mb-4">Quick Links:</h2>
+      <h2 className="font-medium mb-4">Categories:</h2>
       <div className="flex flex-wrap gap-4">
         {categories.map((category) => (
           <motion.div

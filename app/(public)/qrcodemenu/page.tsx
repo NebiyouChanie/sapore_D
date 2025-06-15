@@ -39,11 +39,11 @@ export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Menu - Sapore | Best Italian Restaurant in Addis Ababa",
   description:
-    "Explore Sapore’s menu blending Italian tradition with bold flavors. Enjoy crispy pizzas, rich pastas, specialty lasagnas, fresh salads, and Ethiopian favorites in Addis Ababa.",
+    "Explore Sapore's menu blending Italian tradition with bold flavors. Enjoy crispy pizzas, rich pastas, specialty lasagnas, fresh salads, and Ethiopian favorites in Addis Ababa.",
   openGraph: {
     title: "Menu - Sapore | Best Italian Restaurant in Addis Ababa",
     description:
-      "Explore Sapore’s menu blending Italian tradition with bold flavors. Enjoy crispy pizzas, rich pastas, specialty lasagnas, fresh salads, and Ethiopian favorites in Addis Ababa.",
+      "Explore Sapore's menu blending Italian tradition with bold flavors. Enjoy crispy pizzas, rich pastas, specialty lasagnas, fresh salads, and Ethiopian favorites in Addis Ababa.",
     keywords: [
       "Sapore menu Addis Ababa",
       "Italian menu Addis Ababa",
@@ -71,7 +71,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Menu - Sapore | Best Italian Restaurant in Addis Ababa",
     description:
-      "Explore Sapore’s menu blending Italian tradition with bold flavors. Enjoy crispy pizzas, rich pastas, specialty lasagnas, fresh salads, and Ethiopian favorites in Addis Ababa.",
+      "Explore Sapore's menu blending Italian tradition with bold flavors. Enjoy crispy pizzas, rich pastas, specialty lasagnas, fresh salads, and Ethiopian favorites in Addis Ababa.",
     images: ["https://saporerestaurant.com/hero-section.jpg"],
   },
 };
@@ -149,20 +149,17 @@ export default async function MenuPage() {
                   >
                     Menu
                   </motion.h1>
-                  <motion.p
-                    className="text-gray-500 font-light text-[18px] lg:max-w-[600px]"
-                    initial={{ y: 30, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.4, duration: 0.7 }}
-                  >
-                    We blend Italian tradition with bold flavors and fresh ingredients, offering crispy pizzas like Quattro Formaggi and Pepperoni, rich pastas such as Chicken Alfredo and Pesto Pasta with Fish, and specialty lasagnas like Sapore Lasagna and Beef Lasagna, alongside juicy burgers, fresh salads, and Ethiopian favorites like Chigina Tibs and Shiro. All crafted for sharing and satisfaction.
-                  </motion.p>
                 </header>
-
-                {categories.length > 0 && <QuickLinks categories={categories} />}
               </motion.article>
             </div>
           </motion.section>
+
+          {/* Sticky Quick Links */}
+          <div className="sticky top-0 z-10 bg-white shadow-md">
+            <div className="container px-4 md:px-10 xl:px-32 2xl:px-40 mx-auto">
+              {categories.length > 0 && <QuickLinks categories={categories} />}
+            </div>
+          </div>
 
           {/* Menu Categories Section */}
           <section className="pb-20">
