@@ -231,7 +231,7 @@ export default async function MenuPage() {
                                 <div className="flex justify-between">
                                   <h3 className="font-playfair font-bold">{item.name}</h3>
                                   <span className="font-medium">
-                                    {item?.price ? item.price.toFixed(2) : ""}
+                                    {item?.price ? item.price : ""}
                                   </span>
                                 </div>
                                 <p className="text-sm text-gray-600 mt-1">{item.description}</p>
